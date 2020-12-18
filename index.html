@@ -127,7 +127,52 @@
 			$('.filt-search-box .close-btn').click(function(){
 				$('.filt-search-box').hide();
 			})
-		});
+			// 오늘 읽은만한 글 메뉴를 선택하면
+			$('.group-menu-list a').click(function(e){
+				e.preventDefault();
+				$('.group-menu-list a').removeClass('select');
+				$(this).addClass('select');
+				viewGroupMenuBtn();
+			});
+
+
+
+
+
+			$('.group-menu .next').click(function(e){
+				e.preventDefault();
+				//
+				if($('.group-menu .select').parents('ul').find('li')
+				.last().children().hasClass('select')){
+					menuNum++;
+					var ml = -751 * menuNum;
+					$('.group-menu-list a').removeClass('select')
+					$('.group-menu-list a').eq(menuNum).children().first().children().addClass('select')
+					$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
+				}else{			
+				$('.group-menu .select').parent().next().find('a')
+					.addClass('select');
+				$('.group-menu .select').first().removeClass('select');
+				}
+				viewGroupMenuBtn()
+			})
+			$('.group-menu .prev').click(function(e){
+				e.preventDefault();
+				if($('.group-menu .select').parents('ul').find('li').last().children().hasClass('select')){
+					menuNum--;
+					var ml = -751 * menuNum;
+					$('.group-menu-list a').removeClass('select')
+					$('.group-menu-list a').eq(menuNum).children().last().children().addClass('select')
+					$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
+				}else{			
+					$('.group-menu .select').parent().prev().find('a').addClass('select');
+					$('.group-menu .select').last().removeClass('select');
+				}				
+				viewGroupMenuBtn()
+			})
+		})
+		var menuNum=0;
+
 		//메뉴설정에서 메뉴들을 선택하고 저장했을 때 최종 결정된 메뉴
 		var selectedMenuArr = [];
 		//메뉴설정에서 메뉴들을 선택했을 때 저장된 메뉴
@@ -196,6 +241,18 @@
 			$('.menu-service-box.box2').hide();
 			$('.empty-box').hide();
 			$('.black-menu-box').show();
+		}
+		function viewGroupMenuBtn(){
+			if($('.group-menu-list:first li:first >a').hasClass('select')){
+				$('.group-menu .prev').hide();
+			}else{
+				$('.group-menu .prev').show();
+			}
+			if($('.group-menu-list:last li:last >a').hasClass('select')){
+				$('.group-menu .next').hide();
+			}else{
+				$('.group-menu .next').show();
+			}
 		}
 	</script>
 </head>
@@ -794,33 +851,91 @@
 								</a>
 							</div>
 						</div>
-						<div class="group-menu">
-							<ul>
-								<li>
-									<a href="#" class="enter">엔터</a>
-								</li>
-								<li>
-									<a href="#" class="sports select">스포츠</a>
-								</li>
-								<li>
-									<a href="#" class="car">자동차</a>
-								</li>
-								<li>
-									<a href="#" class="webtoon">웹툰</a>
-								</li>
-								<li>
-									<a href="#" class="finance">경제M</a>
-								</li>
-								<li>
-									<a href="#" class="food">푸드</a>
-								</li>
-								<li>
-									<a href="#" class="game">게임</a>
-								</li>
-								<li>
-									<a href="#" class="movie">영화</a>
-								</li>
-							</ul>
+						<div class="group-menu">						
+							<a href="#" class="prev"></a>
+							<a href="#" class="next"></a>
+							<div class="group-menu-view">
+								<div class="group-menu-wrap after">
+									<ul class="after group-menu-list focus">
+										<li>
+											<a href="#" class="enter">엔터</a>
+										</li>
+										<li>
+											<a href="#" class="sports select">스포츠</a>
+										</li>
+										<li>
+											<a href="#" class="car">자동차</a>
+										</li>
+										<li>
+											<a href="#" class="webtoon">웹툰</a>
+										</li>
+										<li>
+											<a href="#" class="finance">경제M</a>
+										</li>
+										<li>
+											<a href="#" class="food">푸드</a>
+										</li>
+										<li>
+											<a href="#" class="game">게임</a>
+										</li>
+										<li>
+											<a href="#" class="movie">영화</a>
+										</li>
+									</ul>
+									<ul class="after group-menu-list focus">
+										<li>
+											<a href="#" class="job">job</a>
+										</li>
+										<li>
+											<a href="#" class="tech">tech</a>
+										</li>
+										<li>
+											<a href="#" class="dugod">dugod</a>
+										</li>
+										<li>
+											<a href="#" class="yasuo">rhkgkr</a>
+										</li>
+										<li>
+											<a href="#" class="living">living</a>
+										</li>
+										<li>
+											<a href="#" class="health">health</a>
+										</li>
+										<li>
+											<a href="#" class="business">business</a>
+										</li>
+										<li>
+											<a href="#" class="merry">merry</a>
+										</li>
+									</ul>
+									<ul class="after group-menu-list focus">
+										<li>
+											<a href="#" class="job">문화아</a>
+										</li>
+										<li>
+											<a href="#" class="tech">tech</a>
+										</li>
+										<li>
+											<a href="#" class="dugod">dugod</a>
+										</li>
+										<li>
+											<a href="#" class="yasuo">rhkgkr</a>
+										</li>
+										<li>
+											<a href="#" class="living">living</a>
+										</li>
+										<li>
+											<a href="#" class="health">health</a>
+										</li>
+										<li>
+											<a href="#" class="business">business</a>
+										</li>
+										<li>
+											<a href="#" class="merry">merry</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="theme-cont"></div>
@@ -1209,8 +1324,8 @@
 								<a href="#" class="card">코로나바이러스감염증19 현황</a>
 								<a href="#" class="card">날씨 맑음 0.0 -11.0</a>
 								<a href="#" class="card">미세 좋음 초미세 좋음 서초동</a>
-								<a href="#" class="card">##########################</a>
-								<a href="#" class="card">@@@@@@@@@@@@@@@@@@@@@@@@@@</a>
+								<a href="#" class="card">###############</a>
+								<a href="#" class="card">@@@@@@@@@@@@@@@</a>
 							</div>
 						</div>
 					</div>
