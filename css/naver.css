@@ -14,7 +14,9 @@ ul,ol{
 	height: 161px;
 }
 
-.header .auto-box .left-box{
+.header .auto-box .left-box,
+.timesquare-card .card.stock .name
+{
 	float: left;
 }
 .header .auto-box .right-box{
@@ -140,7 +142,7 @@ ul,ol{
 }
 .timesquare-card .timesquare-wrap{
 	width: 100%;
-	height: 100px;
+	height: 100%;
 	overflow: hidden;
 }
 .timesquare-card .timesquare-rolling{
@@ -153,8 +155,53 @@ ul,ol{
 	padding: 15px 0 14px 16px;
 	display: block;
 	float: left;
-	color: #404040;
+}
+.timesquare-card .card.stock .stock-title{
 	font-size: 13px;
+	margin-top: 1px;
+	float: left;
+	line-height: 16px;
+	color: #202020;
+	font-weight: bold;
+}
+.timesquare-card .card.stock .stock-box::before{
+	content: '';
+	display: inline-block;
+	width: 1px;
+	height: 12px;
+	margin: 3px 7px 2px 6px;
+	background-color: #e4e8eb;
+	vertical-align: top;
+	float: left;
+}
+.timesquare-card .card.stock .stock-box{
+	line-height: 17px;
+	font-size: 12px;
+	color: #505050;
+	float: left;
+	vertical-align: top;
+}
+.timesquare-card .card.stock .stock-box .current{
+	margin-left: 6px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #202020;
+	float: left;
+}
+.timesquare-card .rate.rate-up::before{
+	display: inline-block;
+	content: '';
+	width: 9px;
+	height: 6px;
+	vertical-align: 2px;
+	background-position: -393px -258px;
+	background-image: url(https://s.pstatic.net/static/www/img/uit/2020/sp_main_1f05c0.png);
+	background-size: 440px 410px;
+	margin-right: 3px;
+}
+.timesquare-card .rate.rate-up{
+	color: #f05a5a;
+	margin-left: 10px;
 }
 .timesquare-box .btn-box{
 	position: absolute;
@@ -221,8 +268,8 @@ ul,ol{
 	margin: 7px 0 0 6px;
 }
 .rolling-news{
-	width: 310px;
 	height: 24px;
+	width: 310px;
 	float: left;
 	overflow: hidden;
 }
@@ -230,9 +277,9 @@ ul,ol{
 	width: 100%;
 	height: 24px;
 	line-height: 24px;
-    font-size: 13px;
+	font-size: 13px;
 	overflow: hidden;
-    text-overflow: ellipsis;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	display: block;
 	color: #202020;
@@ -909,6 +956,7 @@ ul,ol{
 	width: calc(750px * 3);
 	height: 49px;
 }
+
 .left .group-menu .next,
 .left .group-menu .prev{
 	z-index: 1;
@@ -933,9 +981,38 @@ ul,ol{
 .left .group-menu .prev:hover{
 	background-position: -44px -342px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 .left .group-menu .group-menu-list{
 	float: left;
 }
+
+
+
+.group-menu-list .box{
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -970,12 +1047,12 @@ ul,ol{
 .left .themecast-box .movie:hover		{			color: #1a2f63;		}
 .left .themecast-box .job:hover			{			color: #e65da0;		}
 .left .themecast-box .tech:hover		{			color: #0147b5;		}
-.left .themecast-box .dugod:hover		{			color: #4a94e1;		}
-.left .themecast-box .yasuo:hover		{			color: #66c971;		}
+.left .themecast-box .traval:hover		{			color: #4a94e1;		}
+.left .themecast-box .sci:hover			{			color: #66c971;		}
 .left .themecast-box .living:hover		{			color: #35ae5e;		}
 .left .themecast-box .health:hover		{			color: #e77c43;		}
 .left .themecast-box .business:hover	{			color: #5bb8e1;		}
-.left .themecast-box .merry:hover		{			color: #1a2f63;		}
+.left .themecast-box .marry:hover		{			color: #1a2f63;		}
 .left .themecast-box .group-menu li>a.select{
 	position: relative;
 	margin: 0 -1px;
@@ -992,12 +1069,12 @@ ul,ol{
 .left .themecast-box .movie.select		{			background-color: #1a2f63;		}
 .left .themecast-box .job.select		{			background-color: #e65da0;		}
 .left .themecast-box .tech.select		{			background-color: #0147b5;		}
-.left .themecast-box .dugod.select		{			background-color: #4a94e1;		}
-.left .themecast-box .yasuo.select		{			background-color: #66c971;		}
+.left .themecast-box .traval.select		{			background-color: #4a94e1;		}
+.left .themecast-box .sci.select		{			background-color: #66c971;		}
 .left .themecast-box .living.select		{			background-color: #35ae5e;		}
 .left .themecast-box .health.select		{			background-color: #e77c43;		}
 .left .themecast-box .business.select	{			background-color: #5bb8e1;		}
-.left .themecast-box .merry.select		{			background-color: #1a2f63;		}
+.left .themecast-box .marry.select		{			background-color: #1a2f63;		}
 .footer{
 	background-color: #fafbfc;
 	border-top: 1px solid #e4e8eb;

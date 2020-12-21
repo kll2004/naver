@@ -8,7 +8,7 @@
 	<script src="js/jquery.js"></script>
 	<script src="https://kit.fontawesome.com/b1e3c8f87d.js" 
 		crossorigin="anonymous"></script>
-		<script src="js/rolling.js"></script>
+	<script src="js/rolling.js"></script>
 	<script>
 		$(function(){
 			//검색창에서 자동완성버튼을 클릭
@@ -87,14 +87,14 @@
 				/* 선택된 메뉴가 배열에 있으면 배열에서 제거, 없으면 추가 */
 				var index = tmpMenuArr.indexOf(text);
 				if( index == -1){
-					if(tmpMenuArr.length !=5){
+					if(tmpMenuArr.length != 5){
 						tmpMenuArr.push(text);
 						$('.empty-menu.focus').text(text);
 						$('.empty-menu.focus').addClass('selected');
 						$('.empty-menu.focus').removeClass('focus');
 						$('.empty-menu.selected').last().next().addClass('focus');
 					}else{
-						alert('최대 5개까지 설정');
+						alert('최대 5개까지 설정할 수 있습니다');
 						$(this).prop('checked',false);
 					}
 				}else{
@@ -102,18 +102,19 @@
 					setEmptyMenu(tmpMenuArr);
 				}
 			})
+			//저장 버튼 클릭
 			$('.btn-box .save-btn').click(function(e){
 				e.preventDefault();
+				//tmpMenuArr=>selectedMenuArr에 저장
 				selectedMenuArr = tmpMenuArr.splice(0);
-				if(selectedMenuArr,length == 0){
-					alert('선택된 메뉴가 없음으로 돌아게숑')
+				if(selectedMenuArr.length == 0){
+					alert('선택된 메뉴가 없습니다. 초기설정으로 돌아갑니다.');
 				}
-				// tmpMenuArr=>selectedMenuArr 저장
-				selectedMenuArr = tmpMenuArr.splice(0);
-				// selectedMenuArr에 있는 내용을 토대로 black menu box를 수정
+				//selectedMenuArr에 있는 내용을 토대로 black-menu-box를 수정
 				$('.more-btn').click();
-				setBlackMenu(selectedMenuArr,baseMenuArr);
+				setBlackMenu(selectedMenuArr, baseMenuArr);
 			})
+			//초기화 버튼 클릭
 			$('.btn-box .init-btn').click(function(e){
 				e.preventDefault();
 				alert('초기설정으로 돌아갑니다.');
@@ -127,52 +128,98 @@
 			$('.filt-search-box .close-btn').click(function(){
 				$('.filt-search-box').hide();
 			})
-			// 오늘 읽은만한 글 메뉴를 선택하면
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			//오늘 읽은만한 글 메뉴를 선택하면
 			$('.group-menu-list a').click(function(e){
 				e.preventDefault();
 				$('.group-menu-list a').removeClass('select');
 				$(this).addClass('select');
 				viewGroupMenuBtn();
+				var target = $(this).attr('data-target');
+				if(target !='undefind'){
+					$('.theme-cont-box').hide();
+					$(target).show();
+				}
 			});
-
 
 
 
 
 			$('.group-menu .next').click(function(e){
 				e.preventDefault();
-				//
+				//현재 선택된 메뉴가 메뉴리스트 마지막 메뉴면
 				if($('.group-menu .select').parents('ul').find('li')
-				.last().children().hasClass('select')){
-					menuNum++;
-					var ml = -751 * menuNum;
-					$('.group-menu-list a').removeClass('select')
-					$('.group-menu-list a').eq(menuNum).children().first().children().addClass('select')
-					$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
-				}else{			
-				$('.group-menu .select').parent().next().find('a')
-					.addClass('select');
-				$('.group-menu .select').first().removeClass('select');
+					.last().children().hasClass('select')){
+						menuNum++;
+						var ml = -751 * menuNum;
+						$('.group-menu-list a').removeClass('select');
+						$('.group-menu-list').eq(menuNum).children().
+							first().children().addClass('select');
+						$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
+				}else{
+					$('.group-menu .select').parent().next().find('a')
+						.addClass('select');
+					$('.group-menu .select').first().removeClass('select');
 				}
-				viewGroupMenuBtn()
+				$('.group-menu .select').click();
 			})
 			$('.group-menu .prev').click(function(e){
 				e.preventDefault();
-				if($('.group-menu .select').parents('ul').find('li').last().children().hasClass('select')){
-					menuNum--;
-					var ml = -751 * menuNum;
-					$('.group-menu-list a').removeClass('select')
-					$('.group-menu-list a').eq(menuNum).children().last().children().addClass('select')
-					$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
-				}else{			
-					$('.group-menu .select').parent().prev().find('a').addClass('select');
-					$('.group-menu .select').last().removeClass('select');
-				}				
-				viewGroupMenuBtn()
-			})
-		})
-		var menuNum=0;
+				if($('.group-menu .select').parents('ul').find('li')
+					.first().children().hasClass('select')){
+						menuNum--;
+						var ml = -751 * menuNum;
+						$('.group-menu-list a').removeClass('select');
+						$('.group-menu-list').eq(menuNum).children().
+							last().children().addClass('select');
+						$('.group-menu-wrap').first().animate({'margin-left':ml+'px'},500)
 
+				}else{
+					$('.group-menu .select').parent().prev().find('a')
+						.addClass('select');
+					$('.group-menu .select').last().removeClass('select');
+				}
+				$('.group-menu .select').click();
+			})
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+		});
 		//메뉴설정에서 메뉴들을 선택하고 저장했을 때 최종 결정된 메뉴
 		var selectedMenuArr = [];
 		//메뉴설정에서 메뉴들을 선택했을 때 저장된 메뉴
@@ -187,7 +234,8 @@
 			'VIBE' : '#3',
 			'책'   : '#4',
 			'웹툰' : '#5'
-		};
+		};		
+		var menuNum = 0 ;		
 		function setMenuCheckbox(arr){
 			$('.service-data input').each(function(){
 				var text = $(this).parent().text().trim();
@@ -201,8 +249,8 @@
 		function setBlackMenu(arr1,arr2){
 			var arr;
 			//선택된 메뉴가 없으면 ==> 사용자 설정 메뉴가 없으면
-			if(arr1.length ==0 ){
-				// 기본 메뉴를 기준
+			if(arr1.length == 0){
+				//기본 메뉴를 기준
 				arr = arr2;
 			}else{
 				//선택된 메뉴를 기준
@@ -211,8 +259,8 @@
 			str = '';
 			for(var i = 0; i<arr.length; i++){
 				str +='<li class="black-menu">'
-					+ '<a href="'+menuLink[arr[i]]+'" class="link">'+ arr[i]+'</a>'
-					+ '</li>';									
+						+		'<a href="'+menuLink[arr[i]]+'" class="link">'+arr[i]+'</a>'
+						+	'</li>';
 			}
 			$('.black-menu-box').html(str);
 		}
@@ -242,13 +290,14 @@
 			$('.empty-box').hide();
 			$('.black-menu-box').show();
 		}
+
 		function viewGroupMenuBtn(){
-			if($('.group-menu-list:first li:first >a').hasClass('select')){
+			if($('.group-menu-list:first li:first>a').hasClass('select')){
 				$('.group-menu .prev').hide();
 			}else{
 				$('.group-menu .prev').show();
 			}
-			if($('.group-menu-list:last li:last >a').hasClass('select')){
+			if($('.group-menu-list:last li:last>a').hasClass('select')){
 				$('.group-menu .next').hide();
 			}else{
 				$('.group-menu .next').show();
@@ -643,11 +692,11 @@
 					<div class="left-box">
 						<a href="#" class="link-news">연합뉴스</a>
 						<div class="rolling-news">
-							<a haef="#" class="news">승용차 개소세 내년 6월까지 30% 인하…소비대책 가동</a>
-							<a haef="#" class="news">[2021경제] 늘어난 소비에 소득공제 10% 더…공제한도</a>
-							<a haef="#" class="news">카드사용 늘리면 100만원 소득공제 추가…"내년 3.2% 성장"</a>
-							<a haef="#" class="news">1q1q1q1q1q1q1q1q1q1q1q1q1q1q1q1q1q1q1q1q1</a>
-							<a haef="#" class="news">11111111111222222211111111112222222222222</a>
+							<a href="#" class="news">카드사용 늘리면 100만원 소득공제 추가…"내년 3.2% 성장"</a>
+							<a href="#" class="news">화이자 백신, 미국서도 알레르기 반응…한 병원서 2명째</a>
+							<a href="#" class="news">美FDA 자문위, 모더나백신 사용권고…두번째 백신접종 '초읽기'</a>
+							<a href="#" class="news">[팩트체크] 검찰총장 징계 집행, 대통령 재량은 없다?</a>
+							<a href="#" class="news">경찰, 박원순 휴대폰 포렌식 재개…사망 경위 규명 주력</a>
 						</div>
 					</div>
 					<div class="right-box">
@@ -851,87 +900,87 @@
 								</a>
 							</div>
 						</div>
-						<div class="group-menu">						
+						<div class="group-menu">
 							<a href="#" class="prev"></a>
 							<a href="#" class="next"></a>
 							<div class="group-menu-view">
 								<div class="group-menu-wrap after">
 									<ul class="after group-menu-list focus">
 										<li>
-											<a href="#" class="enter">엔터</a>
+											<a href="#" class="enter" data-target = "#enter">엔터</a>
 										</li>
 										<li>
-											<a href="#" class="sports select">스포츠</a>
+											<a href="#" class="sports select" data-target = "#sports">스포츠</a>
 										</li>
 										<li>
-											<a href="#" class="car">자동차</a>
+											<a href="#" class="car" data-target = "#car">자동차</a>
 										</li>
 										<li>
-											<a href="#" class="webtoon">웹툰</a>
+											<a href="#" class="webtoon" data-target = "#webtoon">웹툰</a>
 										</li>
 										<li>
-											<a href="#" class="finance">경제M</a>
+											<a href="#" class="finance" data-target = "#business">경제M</a>
 										</li>
 										<li>
-											<a href="#" class="food">푸드</a>
+											<a href="#" class="food" data-target = "#food">푸드</a>
 										</li>
 										<li>
-											<a href="#" class="game">게임</a>
+											<a href="#" class="game" data-target = "#game">게임</a>
 										</li>
 										<li>
-											<a href="#" class="movie">영화</a>
-										</li>
-									</ul>
-									<ul class="after group-menu-list focus">
-										<li>
-											<a href="#" class="job">job</a>
-										</li>
-										<li>
-											<a href="#" class="tech">tech</a>
-										</li>
-										<li>
-											<a href="#" class="dugod">dugod</a>
-										</li>
-										<li>
-											<a href="#" class="yasuo">rhkgkr</a>
-										</li>
-										<li>
-											<a href="#" class="living">living</a>
-										</li>
-										<li>
-											<a href="#" class="health">health</a>
-										</li>
-										<li>
-											<a href="#" class="business">business</a>
-										</li>
-										<li>
-											<a href="#" class="merry">merry</a>
+											<a href="#" class="movie" data-target = "#movie">영화</a>
 										</li>
 									</ul>
 									<ul class="after group-menu-list focus">
 										<li>
-											<a href="#" class="job">문화아</a>
+											<a href="#" class="job" data-target = "#JOB">JOB&</a>
 										</li>
 										<li>
-											<a href="#" class="tech">tech</a>
+											<a href="#" class="tech">테크</a>
 										</li>
 										<li>
-											<a href="#" class="dugod">dugod</a>
+											<a href="#" class="traval">여행+</a>
 										</li>
 										<li>
-											<a href="#" class="yasuo">rhkgkr</a>
+											<a href="#" class="sci">과학</a>
 										</li>
 										<li>
-											<a href="#" class="living">living</a>
+											<a href="#" class="living">리빙</a>
 										</li>
 										<li>
-											<a href="#" class="health">health</a>
+											<a href="#" class="health">건강</a>
 										</li>
 										<li>
-											<a href="#" class="business">business</a>
+											<a href="#" class="business">비즈니스</a>
 										</li>
 										<li>
-											<a href="#" class="merry">merry</a>
+											<a href="#" class="marry">연애·결혼</a>
+										</li>
+									</ul>
+									<ul class="after group-menu-list focus">
+										<li>
+											<a href="#" class="job">책문화</a>
+										</li>
+										<li>
+											<a href="#" class="tech">테크</a>
+										</li>
+										<li>
+											<a href="#" class="traval">여행+</a>
+										</li>
+										<li>
+											<a href="#" class="sci">과학</a>
+										</li>
+										<li>
+											<a href="#" class="living">리빙</a>
+										</li>
+										<li>
+											<a href="#" class="health">건강</a>
+										</li>
+										<li>
+											<a href="#" class="business">비즈니스</a>
+										</li>
+										<li>
+											<a href="#" class="marry">연애·결혼</a>
 										</li>
 									</ul>
 								</div>
@@ -940,7 +989,7 @@
 					</div>
 					<div class="theme-cont"></div>
 				</div>
-				<div class="theme-cont-box">
+				<div class="theme-cont-box" id="sports">
 					<div class="top-box after">
 						<div class="left-box">
 							<a href="#" class="thumb-box">
@@ -1297,6 +1346,14 @@
 						</button>
 					</div>
 				</div>
+				<div class="theme-cont-box" id="enter">엔터</div>
+				<div class="theme-cont-box" id="car">자동차</div>
+				<div class="theme-cont-box" id="webtoon">웹툰</div>
+				<div class="theme-cont-box" id="business">경제</div>
+				<div class="theme-cont-box" id="food">푸드</div>
+				<div class="theme-cont-box" id="game">게임</div>
+				<div class="theme-cont-box" id="movie">영화</div>
+				<div class="theme-cont-box" id="JOB">잡앤</div>
 			</div>
 			<div class="right">
 				<div class="login-box box">
@@ -1321,12 +1378,19 @@
 					<div class="timesquare-card">
 						<div class="timesquare-wrap">
 							<div class="timesquare-rolling">
-								<a href="#" class="card">코로나바이러스감염증19 현황</a>
-								<a href="#" class="card">날씨 맑음 0.0 -11.0</a>
-								<a href="#" class="card">미세 좋음 초미세 좋음 서초동</a>
-								<a href="#" class="card">##########################</a>
-								<a href="#" class="card">@@@@@@@@@@@@@@@@@@@@@@@@@@</a>
-
+								<a href="#" class="card stock">
+									<span class="stock-title">증시</span>
+									<div class="stock-box">
+										<span class="name">코스닥</span>
+										<span class="current">946.39</span>
+										<span class="rate rate-up">2.35 +0.25%</span>
+									</div>
+								</a>
+								<a href="#" class="card">bbbbb</a>
+								<a href="#" class="card">ccccc</a>
+								<a href="#" class="card">ddddd</a>
+								<a href="#" class="card">eeeee</a>
+								<a href="#" class="card">fffff</a>
 							</div>
 						</div>
 					</div>
